@@ -1,14 +1,306 @@
-<! DOCTYPE html>
-<html Lang="pt-br">
-chead>
-<meta charset="UTF-8">
-<meta nome-"viewport" content-"width-device-width, initial-scale-1.0">
-<title>Aula GitHub</title>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OI AMOR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Press Start 2P', cursive;
+      background-color: #4c7fc8;
+      color: #FF1493;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 16px;
+      font-weight: bold;
+      color: #FF1493;
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #FF1493;
+      font-size: 12px;
+    }
+
+    .main-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 40px 20px;
+      gap: 30px;
+    }
+
+    .main-content img {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .text-block {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .text-block h2 {
+      font-size: 12px;
+      margin-bottom: 20px;
+      color: #FF1493;
+    }
+
+    #loveChart {
+      width: 100% !important;
+      height: 250px !important;
+    }
+
+    .heart-button {
+      margin-top: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .heart-button img {
+      width: 60px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .heart-button.clicked img {
+      animation: explode 0.5s ease forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.7; }
+      100% { transform: scale(0); opacity: 0; }
+    }
+
+    .countdown {
+      margin-top: 10px;
+      font-size: 10px;
+      color: white;
+      opacity: 0.9;
+    }
+
+    .daily-message {
+      margin: 20px auto 10px;
+      max-width: 600px;
+      color: white;
+      font-size: 12px;
+      text-align: center;
+      padding: 10px;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      background-color: #4c7fc8;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    }
+
+    iframe {
+      width: 100%;
+      max-width: 600px;
+      height: 352px;
+      border-radius: 12px;
+      display: block;
+      margin: 0 auto;
+      background-color: #4c7fc8;
+    }
+
+    @media (max-width: 768px) {
+      .text-block h2 {
+        font-size: 10px;
+      }
+
+      .heart-button img {
+        width: 50px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Olá, Mundo</h1>
-    <h2>Mladição quebrada</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, cumque.</p>
+  <header>
+    <div class="logo">OI AMOR</div>
+    <nav>
+      <a href="#">EU</a>
+      <a href="#">TE</a>
+      <a href="#">AMO</a>
+      <a href="#">LANNA</a>
+    </nav>
+  </header>
 
+  <section class="main-content">
+    <img src="img/EU_TE_AMO-removebg-preview.png" alt="Foto do casal" />
+
+    <div class="text-block">
+      <h2>Você consegue adivinhar o quanto te amo agora?</h2>
+      <canvas id="loveChart"></canvas>
+      <button class="heart-button" id="heartButton">
+        <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" alt="Coração" />
+      </button>
+      <div class="countdown" id="countdownMessage"></div>
+    </div>
+
+    <img src="img/EU_TE_AMO__3_-removebg-preview.png" alt="Imagem decorativa" />
+  </section>
+
+  <div class="daily-message" id="dailyMessage"></div>
+
+  <footer>
+    <iframe src="https://open.spotify.com/embed/playlist/3i0LiJ0Gd87qGiy59MFezn?utm_source=generator" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const messages = [
+      "Lanna, cada batida do meu coração sussurra seu nome. 💗",
+      "Até as estrelas invejam o brilho que você traz pra minha vida. ✨",
+      "Se amar você fosse música, eu viveria em uma eterna canção. 🎶",
+      "Nos planos de Deus, eu sei que você foi minha bênção favorita. 🙏",
+      "Meu amor por você cresce mais do que fermento em pão quente. 🍞❤️",
+      "Você é o aleluia das minhas orações. 💒",
+      "Te amo mais do que café em segunda-feira. ☕😍",
+      "Lanna, você é minha poesia diária, rimada com amor. 📜💘",
+      "Quando penso em paraíso, é você que me vem à mente. 🌸",
+      "Se meu coração tivesse endereço, seria o seu nome. 💌"
+    ];
+
+    function resetData() {
+      return { days: [0], levels: [100], lastClickTime: null };
+    }
+
+    let storedData = resetData();
+    localStorage.setItem('loveData', JSON.stringify(storedData));
+
+    const ctx = document.getElementById('loveChart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: storedData.days,
+        datasets: [{
+          label: '❤️ Amor em barras mágicas',
+          data: storedData.levels,
+          backgroundColor: 'rgba(255, 105, 180, 0.6)',
+          borderColor: '#FF1493',
+          borderWidth: 2,
+          borderRadius: {
+            topLeft: 5,
+            topRight: 5,
+            bottomLeft: 0,
+            bottomRight: 0
+          }
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: {
+          duration: 1000,
+          easing: 'easeOutBounce'
+        },
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 200,
+            ticks: {
+              callback: value => value + '%'
+            }
+          },
+          x: {
+            ticks: {
+              autoSkip: true,
+              maxTicksLimit: 10
+            }
+          }
+        }
+      }
+    });
+
+    function updateDailyMessage(index) {
+      const messageEl = document.getElementById('dailyMessage');
+      messageEl.textContent = messages[index % messages.length];
+    }
+
+    function increaseLove() {
+      const now = new Date();
+      const lastClickTime = storedData.lastClickTime ? new Date(storedData.lastClickTime) : null;
+
+      if (lastClickTime && now - lastClickTime < 86400000) {
+        const diff = Math.floor((lastClickTime.getTime() + 86400000 - now.getTime()) / 1000);
+        startCountdown(diff);
+        return;
+      }
+
+      storedData.lastClickTime = now.toISOString();
+
+      const heartButton = document.getElementById('heartButton');
+      heartButton.classList.add('clicked');
+      setTimeout(() => heartButton.classList.remove('clicked'), 500);
+
+      const lastLevel = storedData.levels[storedData.levels.length - 1];
+      const newLevel = lastLevel + 10;
+      const newDay = storedData.days.length;
+
+      storedData.days.push(newDay);
+      storedData.levels.push(newLevel);
+
+      localStorage.setItem('loveData', JSON.stringify(storedData));
+
+      chart.data.labels = storedData.days;
+      chart.data.datasets[0].data = storedData.levels;
+      chart.update();
+
+      updateDailyMessage(newDay);
+    }
+
+    function startCountdown(seconds) {
+      const countdownEl = document.getElementById('countdownMessage');
+      const interval = setInterval(() => {
+        const hrs = String(Math.floor(seconds / 3600)).padStart(2, '0');
+        const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+        const secs = String(seconds % 60).padStart(2, '0');
+        countdownEl.textContent = `Aguarde para o próximo clique: ${hrs}:${mins}:${secs}`;
+        if (--seconds < 0) {
+          clearInterval(interval);
+          countdownEl.textContent = '';
+        }
+      }, 1000);
+    }
+
+    document.getElementById('heartButton').addEventListener('click', increaseLove);
+    updateDailyMessage(storedData.days.length - 1);
+  </script>
 </body>
 </html>
