@@ -1,279 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OI AMOR</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-    <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-  
-      body {
-        font-family: 'Press Start 2P', cursive;
-        background-color: #4c7fc8;
-        color: #FF1493;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
-  
-      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-        background: linear-gradient(45deg, #FF1493, #FF69B4);
-        color: white;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        flex-wrap: wrap;
-        border-bottom: 4px solid #FF1493;
-      }
-  
-      .logo {
-        font-size: 24px;
-        font-weight: bold;
-        color: white;
-        letter-spacing: 2px;
-      }
-  
-      nav a {
-        margin: 0 15px;
-        text-decoration: none;
-        color: white;
-        font-size: 14px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: color 0.3s ease;
-      }
-  
-      nav a:hover {
-        color: #FF69B4;
-      }
-  
-      .main-content {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 40px 20px;
-        gap: 30px;
-      }
-  
-      .main-content img {
-        width: 100%;
-        max-width: 280px;
-        height: auto;
-        border-radius: 12px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      }
-  
-      .text-block {
-        width: 100%;
-        max-width: 500px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-      }
-  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OI AMOR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Press Start 2P', cursive;
+      background-color: #4c7fc8;
+      color: #FF1493;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      width: 300px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #FF1493;
+      border-radius: 5px;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 10px;
+      background-color: #FF1493;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .login-container button:hover {
+      background-color: #e60073;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .main-content {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 40px 20px;
+      gap: 30px;
+    }
+
+    .text-block {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .text-block h2 {
+      font-size: 12px;
+      margin-bottom: 20px;
+      color: #FF1493;
+    }
+
+    #loveChart {
+      width: 100% !important;
+      height: 250px !important;
+    }
+
+    .heart-button {
+      margin-top: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .heart-button img {
+      width: 60px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .heart-button.clicked img {
+      animation: explode 0.5s ease forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.7; }
+      100% { transform: scale(0); opacity: 0; }
+    }
+
+    .countdown {
+      margin-top: 10px;
+      font-size: 10px;
+      color: white;
+      opacity: 0.9;
+    }
+
+    .daily-message {
+      margin: 20px auto 10px;
+      max-width: 600px;
+      color: white;
+      font-size: 12px;
+      text-align: center;
+      padding: 10px;
+    }
+
+    iframe {
+      width: 100%;
+      max-width: 600px;
+      height: 352px;
+      border-radius: 12px;
+      display: block;
+      margin: 30px auto 0;
+      background-color: #4c7fc8;
+    }
+
+    @media (max-width: 768px) {
       .text-block h2 {
-        font-size: 14px;
-        margin-bottom: 20px;
-        color: #FF1493;
-      }
-  
-      #loveChart {
-        width: 100% !important;
-        height: 250px !important;
-      }
-  
-      .heart-button {
-        margin-top: 20px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        position: relative;
-      }
-  
-      .heart-button img {
-        width: 60px;
-        transition: transform 0.3s ease-in-out;
-      }
-  
-      .heart-button.clicked img {
-        animation: explode 0.5s ease forwards;
-      }
-  
-      @keyframes explode {
-        0% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.5); opacity: 0.7; }
-        100% { transform: scale(0); opacity: 0; }
-      }
-  
-      .countdown {
-        margin-top: 10px;
         font-size: 10px;
-        color: white;
-        opacity: 0.9;
       }
-  
-      .daily-message {
-        margin: 20px auto 10px;
-        max-width: 600px;
-        color: white;
-        font-size: 12px;
-        text-align: center;
-        padding: 10px;
+
+      .heart-button img {
+        width: 50px;
       }
-  
-      footer {
-        margin-top: auto;
-        padding: 20px;
-        background-color: #4c7fc8;
-        box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Tela de login -->
+  <div class="login-container" id="loginContainer">
+    <input type="text" id="username" placeholder="Usuário" />
+    <input type="password" id="password" placeholder="Senha" />
+    <button id="loginButton">Entrar</button>
+    <p class="error-message" id="errorMessage"></p>
+  </div>
+
+  <!-- Conteúdo principal (visível após o login) -->
+  <section class="main-content" id="mainContent">
+    <img src="img/EU_TE_AMO-removebg-preview.png" alt="Foto do casal" />
+
+    <div class="text-block">
+      <h2>Você consegue adivinhar o quanto te amo agora?</h2>
+      <canvas id="loveChart"></canvas>
+      <button class="heart-button" id="heartButton">
+        <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" alt="Coração" />
+      </button>
+      <div class="countdown" id="countdownMessage"></div>
+    </div>
+
+    <img src="img/EU_TE_AMO__3_-removebg-preview.png" alt="Imagem decorativa" />
+
+    <!-- Spotify agora dentro do conteúdo principal -->
+    <iframe src="https://open.spotify.com/embed/playlist/3i0LiJ0Gd87qGiy59MFezn?utm_source=generator" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  </section>
+
+  <div class="daily-message" id="dailyMessage"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const correctUsername = 'admin';
+    const correctPassword = 'Lanna2402';
+
+    document.getElementById('loginButton').addEventListener('click', function() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      
+      if (username === correctUsername && password === correctPassword) {
+        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'flex';
+      } else {
+        document.getElementById('errorMessage').textContent = 'Usuário ou senha incorretos.';
       }
-  
-      iframe {
-        width: 100%;
-        max-width: 600px;
-        height: 352px;
-        border-radius: 12px;
-        display: block;
-        margin: 0 auto;
-        background-color: #4c7fc8;
-      }
-  
-      @media (max-width: 768px) {
-        .text-block h2 {
-          font-size: 10px;
-        }
-  
-        .heart-button img {
-          width: 50px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <div class="logo">OI AMOR</div>
-      <nav>
-        <a href="#">EU</a>
-        <a href="#">TE</a>
-        <a href="#">AMO</a>
-        <a href="#">LANNA</a>
-      </nav>
-    </header>
-  
-    <section class="main-content">
-      <img src="img/EU_TE_AMO-removebg-preview.png" alt="Foto do casal" />
-  
-      <div class="text-block">
-        <h2>Você consegue adivinhar o quanto te amo agora?</h2>
-        <canvas id="loveChart"></canvas>
-        <button class="heart-button" id="heartButton">
-          <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" alt="Coração" />
-        </button>
-        <div class="countdown" id="countdownMessage"></div>
-      </div>
-  
-      <img src="img/EU_TE_AMO__3_-removebg-preview.png" alt="Imagem decorativa" />
-    </section>
-  
-    <div class="daily-message" id="dailyMessage"></div>
-  
-    <footer>
-      <iframe src="https://open.spotify.com/embed/playlist/3i0LiJ0Gd87qGiy59MFezn?utm_source=generator" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </footer>
-  
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-      // Resetando os dados ao iniciar
-      localStorage.removeItem('loveData');
-      const resetData = () => ({ days: [0], levels: [0], lastClickTime: null });
-  
-      // Criação do gráfico
-      let storedData = resetData();
-      const ctx = document.getElementById('loveChart').getContext('2d');
-      const chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: storedData.days,
-          datasets: [{
-            label: '❤️ Amor em barras mágicas',
-            data: storedData.levels,
-            backgroundColor: 'rgba(255, 105, 180, 0.6)',
-            borderColor: '#FF1493',
-            borderWidth: 2,
-            borderRadius: {
-              topLeft: 5,
-              topRight: 5,
-              bottomLeft: 0,
-              bottomRight: 0
-            }
-          }]
+    });
+
+    let storedData = JSON.parse(localStorage.getItem('loveData')) || { days: [0], levels: [100], lastClickTime: null };
+
+    const ctx = document.getElementById('loveChart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: storedData.days,
+        datasets: [{
+          label: '❤️ Amor em barras mágicas',
+          data: storedData.levels,
+          backgroundColor: 'rgba(255, 105, 180, 0.6)',
+          borderColor: '#FF1493',
+          borderWidth: 2,
+          borderRadius: {
+            topLeft: 5,
+            topRight: 5
+          }
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: {
+          duration: 1000,
+          easing: 'easeOutBounce'
         },
-        options: {
-          responsive: true,
-          animation: {
-            duration: 1000,
-            easing: 'easeOutBounce'
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 200,
+            ticks: {
+              callback: value => value + '%'
+            }
           },
-          plugins: {
-            legend: { display: false }
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 200,
-              ticks: {
-                callback: value => value + '%'
-              }
-            },
-            x: {
-              ticks: {
-                autoSkip: true,
-                maxTicksLimit: 10
-              }
+          x: {
+            ticks: {
+              autoSkip: true,
+              maxTicksLimit: 10
             }
           }
         }
-      });
-  
-      // Lógica do botão e do contador
-      function increaseLove() {
-        const now = new Date();
-        const lastClickTime = storedData.lastClickTime ? new Date(storedData.lastClickTime) : null;
-  
-        if (lastClickTime && now - lastClickTime < 86400000) {
-          const diff = Math.floor((lastClickTime.getTime() + 86400000 - now.getTime()) / 1000);
-          startCountdown(diff);
-          return;
-        }
-  
-        storedData.lastClickTime = now.toISOString();
-  
-        const heartButton = document.getElementById('heartButton');
-        heartButton.classList.add('clicked');
-        setTimeout(() => heartButton.classList.remove('clicked'), 500);
-  
-        const lastLevel = storedData.levels[storedData.levels.length - 1];
-        const newLevel = lastLevel + 10;
-        const newDay = storedData.days.length;
-  
-        storedData.days.push(newDay);
-        storedData.levels.push(newLevel);
-  
-        localStorage.setItem('loveData', JSON.stringify(storedData));
-  
-        chart.data.labels = storedData.days;
-        chart.data.datasets[0].data = storedData.levels;
-        chart.update();
       }
-  
-      document.getElementById('heartButton').addEventListener('click', increaseLove);
-    </script>
-  </body>
-  
+    });
+
+    function updateDailyMessage(index) {
+      // Implementar se necessário
+    }
+
+    function increaseLove() {
+      const now = new Date();
+      const lastClickTime = storedData.lastClickTime ? new Date(storedData.lastClickTime) : null;
+
+      if (lastClickTime && now - lastClickTime < 86400000) {
+        const diff = Math.floor((lastClickTime.getTime() + 86400000 - now.getTime()) / 1000);
+        startCountdown(diff);
+        return;
+      }
+
+      storedData.lastClickTime = now.toISOString();
+
+      const heartButton = document.getElementById('heartButton');
+      heartButton.classList.add('clicked');
+      setTimeout(() => heartButton.classList.remove('clicked'), 500);
+
+      const lastLevel = storedData.levels[storedData.levels.length - 1];
+      const newLevel = lastLevel + 10;
+      const newDay = storedData.days.length;
+
+      storedData.days.push(newDay);
+      storedData.levels.push(newLevel);
+
+      localStorage.setItem('loveData', JSON.stringify(storedData));
+
+      chart.data.labels = storedData.days;
+      chart.data.datasets[0].data = storedData.levels;
+      chart.update();
+
+      updateDailyMessage(newDay);
+    }
+
+    function startCountdown(seconds) {
+      const countdownEl = document.getElementById('countdownMessage');
+      const interval = setInterval(() => {
+        const hrs = String(Math.floor(seconds / 3600)).padStart(2, '0');
+        const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+        const secs = String(seconds % 60).padStart(2, '0');
+        countdownEl.textContent = `Aguarde para o próximo clique: ${hrs}:${mins}:${secs}`;
+        if (--seconds < 0) {
+          clearInterval(interval);
+          countdownEl.textContent = '';
+        }
+      }, 1000);
+    }
+
+    document.getElementById('heartButton').addEventListener('click', increaseLove);
+    updateDailyMessage(storedData.days.length - 1);
+  </script>
+
+</body>
+</html>
